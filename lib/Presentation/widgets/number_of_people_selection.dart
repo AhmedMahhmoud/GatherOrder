@@ -88,9 +88,11 @@ class _NumberOfPeopleSelectionState extends State<NumberOfPeopleSelection> {
                               if (int.parse(value!) > 10) {
                                 displayErrorToast(context,
                                     "Maximum number of people is 10 only");
+                                return "";
                               } else if (int.parse(value) == 0) {
                                 displayErrorToast(
                                     context, "Please enter at least one user");
+                                return "";
                               }
                               return null;
                             },
