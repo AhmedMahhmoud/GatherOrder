@@ -16,8 +16,6 @@ class _BeginButtonState extends State<BeginButton>
   late final AnimationController _animationController;
   @override
   void initState() {
-    // TODO: implement initState
-
     _animationController =
         AnimationController(vsync: this, duration: const Duration(seconds: 1))
           ..addStatusListener((status) {
@@ -27,7 +25,6 @@ class _BeginButtonState extends State<BeginButton>
 
   @override
   void dispose() {
-    // TODO: implement dispose
     _animationController.dispose();
     super.dispose();
   }
