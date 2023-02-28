@@ -1,17 +1,12 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ordering_system/Core/Shared/custom_text_field.dart';
-import 'package:provider/provider.dart';
-import 'package:lottie/lottie.dart';
 import 'package:ordering_system/Core/ColorManager/app_colors.dart';
-
+import 'package:ordering_system/Presentation/View/items_selection_page.dart';
+import 'package:ordering_system/ViewModel/users_services.dart';
+import 'package:provider/provider.dart';
 import '../../ViewModel/app_services.dart';
-import '../widgets/begin_button.dart';
-import '../widgets/number_of_people_animation.dart';
-import '../widgets/number_of_people_selection.dart';
 
 class SaveUserNamesButton extends StatelessWidget {
   const SaveUserNamesButton({
@@ -41,7 +36,13 @@ class SaveUserNamesButton extends StatelessWidget {
                   return;
                 } else {
                   formKey.currentState!.save();
-                  print(userMap);
+                  Provider.of<UsersServices>(context, listen: false)
+                      .addUsers(userMap);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ItemsSelectionPage(),
+                      ));
                 }
               },
               child: const Center(

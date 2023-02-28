@@ -1,17 +1,17 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ordering_system/Core/Shared/custom_text_field.dart';
+import 'package:ordering_system/Presentation/widgets/display_users_list.dart';
 import 'package:provider/provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:ordering_system/Core/ColorManager/app_colors.dart';
 
 import '../../ViewModel/app_services.dart';
+import '../widgets/animated_begin_button.dart';
 import '../widgets/begin_button.dart';
 import '../widgets/number_of_people_animation.dart';
-import '../widgets/number_of_people_selection.dart';
 import '../widgets/save_user_names_button.dart';
 
 class Home extends StatefulWidget {
@@ -23,7 +23,6 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
-  Map<String, String> userMap = {};
   @override
   void initState() {
     _animationController = AnimationController(
@@ -33,6 +32,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ));
     super.initState();
   }
+
+  Map<String, String> userMap = {};
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
@@ -64,26 +65,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         Consumer<AppServices>(
                           builder: (context, value, _) {
                             if (!value.beginApp) {
-                              return FadeIn(
-                                  delay: const Duration(seconds: 1),
-                                  child: Center(
-                                    child: Column(
-                                      children: [
-                                        Lottie.network(
-                                            "https://assets8.lottiefiles.com/private_files/lf30_rnizksef.json"),
-                                        Text(
-                                          "Are you ready to make your order ?",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15.sp),
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        const BeginButton()
-                                      ],
-                                    ),
-                                  ));
+                              return const AnimatedBeginButton();
                             }
                             if (value.usersNumberEntered) {
                               return Padding(
@@ -108,99 +90,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                       SizedBox(
                                         height: 10.h,
                                       ),
-                                      SizedBox(
-                                        height:
-                                            MediaQuery.of(context).size.height -
-                                                120.h,
-                                        child: ListView(
-                                          physics: BouncingScrollPhysics(),
-                                          children: [
-                                            Align(
-                                              alignment: Alignment.topRight,
-                                              child: Wrap(
-                                                spacing: 10.w,
-                                                runSpacing: 15.h,
-                                                children: List.generate(
-                                                    value.numberOfUsersEntered,
-                                                    (index) => SlideInRight(
-                                                        duration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    400),
-                                                        delay: Duration(
-                                                            milliseconds:
-                                                                200 * index),
-                                                        child: SizedBox(
-                                                            child: Row(
-                                                          children: [
-                                                            SizedBox(
-                                                              width: 10.w,
-                                                            ),
-                                                            Column(
-                                                              children: [
-                                                                const Icon(
-                                                                  (Icons
-                                                                      .person),
-                                                                  color: AppColors
-                                                                      .greyColor,
-                                                                ),
-                                                                const SizedBox(
-                                                                  height: 3,
-                                                                ),
-                                                                AutoSizeText(
-                                                                  "User ${index + 1}",
-                                                                  style: const TextStyle(
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      color: AppColors
-                                                                          .whiteColor),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Expanded(
-                                                                child:
-                                                                    Container()),
-                                                            Padding(
-                                                              padding: const EdgeInsets
-                                                                      .symmetric(
-                                                                  horizontal:
-                                                                      10),
-                                                              child: SizedBox(
-                                                                  width: MediaQuery.of(
-                                                                              context)
-                                                                          .size
-                                                                          .width /
-                                                                      1.5,
-                                                                  child:
-                                                                      CustomTextField(
-                                                                    validator:
-                                                                        (p0) {
-                                                                      if (p0
-                                                                          .toString()
-                                                                          .isEmpty) {
-                                                                        return "Can't be empty";
-                                                                      }
-                                                                      return null;
-                                                                    },
-                                                                    style: const TextStyle(
-                                                                        color: AppColors
-                                                                            .whiteColor),
-                                                                    onSaved:
-                                                                        (p0) {
-                                                                      userMap['$index'] =
-                                                                          p0.toString();
-                                                                      print(p0);
-                                                                    },
-                                                                  )),
-                                                            ),
-                                                          ],
-                                                        )))),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                      DisplayUsersList(
+                                          usersMap: userMap, value: value),
                                       FadeIn(
                                         delay: Duration(
                                             milliseconds: 200 *
