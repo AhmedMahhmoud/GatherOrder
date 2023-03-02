@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ordering_system/Core/ColorManager/app_colors.dart';
 import 'package:ordering_system/Presentation/View/items_selection_page.dart';
+import 'package:ordering_system/Presentation/assign_items_to_user/screens/arrang_user_with_items_screen.dart';
 import 'package:ordering_system/ViewModel/users_services.dart';
 import 'package:provider/provider.dart';
 import '../../ViewModel/app_services.dart';
@@ -41,7 +42,9 @@ class SaveUserNamesButton extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ItemsSelectionPage(),
+                        builder: (context) => ArrangUserWithItemsScreen(
+                          userLength: userMap.length,
+                        ),
                       ));
                 }
               },
