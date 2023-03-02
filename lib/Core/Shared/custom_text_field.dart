@@ -14,6 +14,7 @@ class CustomTextField extends StatelessWidget {
       this.validator,
       this.onTap,
       this.errorBorder,
+      this.borderRadius,
       this.suffixIcon,
       this.intialValue,
       this.hintText,
@@ -30,6 +31,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType textInputType;
   final bool isObscure;
   final TextStyle? style;
+  final BorderRadius? borderRadius;
   final TextEditingController? textEditingController;
   final void Function(String)? onChanged;
   final void Function()? onTap;
@@ -80,21 +82,21 @@ class CustomTextField extends StatelessWidget {
             color: AppColors.errorColor,
             width: 2,
           ),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: borderRadius ?? BorderRadius.circular(15),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(
             color: AppColors.greyColor,
             width: 2,
           ),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: borderRadius ?? BorderRadius.circular(15),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: const BorderSide(
             color: Color(0xff363636),
             width: 2,
           ),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: borderRadius ?? BorderRadius.circular(15),
         ),
         disabledBorder: disabledBorder,
         enabledBorder: OutlineInputBorder(
@@ -102,7 +104,7 @@ class CustomTextField extends StatelessWidget {
             color: AppColors.greyColor,
             width: 2,
           ),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: borderRadius ?? BorderRadius.circular(15),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ordering_system/Presentation/View/items_selection_page.dart';
 import '../../Core/ColorManager/app_colors.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
@@ -42,6 +43,11 @@ class _BeginButtonState extends State<BeginButton>
             const Duration(milliseconds: 800),
             () {
               Provider.of<AppServices>(context, listen: false).startOrder();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ItemsSelectionPage(),
+                  ));
             },
           );
         },
