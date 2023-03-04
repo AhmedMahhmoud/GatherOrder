@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:ordering_system/Core/ColorManager/app_colors.dart';
 import 'package:ordering_system/Core/Shared/shared_methods.dart';
 import 'package:ordering_system/ViewModel/app_services.dart';
@@ -53,10 +51,10 @@ class _NumberOfPeopleSelectionState extends State<NumberOfPeopleSelection> {
             AnimatedPositioned(
               bottom: showNumberField ? 400.h : 300.h,
               duration: const Duration(seconds: 1),
-              curve: Curves.decelerate,
+              curve: Curves.easeIn,
               child: ZoomIn(
                   child: AutoSizeText(
-                "Lets start by adding the number of people in the order ",
+                "Time to add the people number in the order",
                 style: TextStyle(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w700,

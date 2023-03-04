@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ordering_system/Core/ColorManager/app_colors.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ordering_system/Presentation/View/home.dart';
 import 'package:ordering_system/ViewModel/items/iterms_services.dart';
 import 'package:provider/provider.dart';
 import '../widgets/animated_add_item_button.dart';
@@ -76,16 +77,23 @@ class _ItemsSelectionPageState extends State<ItemsSelectionPage> {
                       SizedBox(
                         height: 10.h,
                       ),
-                      Container(
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                                width: 1, color: AppColors.greyColor)),
-                        child: const Icon(
-                          semanticLabel: 'Save',
-                          FontAwesomeIcons.floppyDisk,
-                          color: AppColors.greyColor,
+                      InkWell(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Home(),
+                            )),
+                        child: Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  width: 1, color: AppColors.greyColor)),
+                          child: const Icon(
+                            semanticLabel: 'Save',
+                            FontAwesomeIcons.floppyDisk,
+                            color: AppColors.greyColor,
+                          ),
                         ),
                       )
                     ]
