@@ -5,7 +5,7 @@ import 'package:ordering_system/Core/ColorManager/app_colors.dart';
 import 'package:provider/provider.dart';
 
 import '../../Model/items.dart';
-import '../../ViewModel/iterms_services.dart';
+import '../../ViewModel/items/iterms_services.dart';
 
 class SaveItemsButton extends StatelessWidget {
   const SaveItemsButton({super.key, required this.item});
@@ -17,25 +17,26 @@ class SaveItemsButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width / 2,
         height: 35.h,
         child: MaterialButton(
-            color: AppColors.whiteColor,
+            elevation: 5,
+            color: AppColors.successColor,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             onPressed: () async {
-              print(item.itemName);
-
               FocusManager.instance.primaryFocus?.unfocus();
-              await Provider.of<ItemServices>(context, listen: false)
+              bool itemAdded = Provider.of<ItemServices>(context, listen: false)
                   .addNewItem(item, context);
-              Future.delayed(
-                const Duration(milliseconds: 400),
-                () => Navigator.pop(context),
-              );
+              if (itemAdded) {
+                Future.delayed(
+                  const Duration(milliseconds: 200),
+                  () => Navigator.pop(context),
+                );
+              }
             },
             child: const Center(
               child: AutoSizeText(
                 "Save",
                 style: TextStyle(
-                    fontWeight: FontWeight.bold, color: AppColors.blackColor),
+                    fontWeight: FontWeight.bold, color: AppColors.whiteColor),
               ),
             )),
       ),

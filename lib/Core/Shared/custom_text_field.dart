@@ -72,6 +72,7 @@ class CustomTextField extends StatelessWidget {
       textInputAction: TextInputAction.next,
       keyboardType: textInputType,
       decoration: InputDecoration(
+        contentPadding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         suffixIcon: suffixIcon,
         labelText: hintText,
         prefixIcon: prefixIcon,

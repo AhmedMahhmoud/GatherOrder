@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import 'package:ordering_system/ViewModel/app_services.dart';
-import 'package:ordering_system/ViewModel/iterms_services.dart';
+import 'package:ordering_system/ViewModel/items/iterms_services.dart';
 import 'package:ordering_system/ViewModel/users_services.dart';
 import 'Presentation/View/home.dart';
 import 'package:provider/provider.dart';
