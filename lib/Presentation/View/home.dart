@@ -67,51 +67,51 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             if (!value.beginApp) {
                               return const AnimatedBeginButton();
                             }
-                            if (value.usersNumberEntered) {
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 20),
-                                child: Form(
-                                  key: formKey,
-                                  child: Column(
-                                    children: [
-                                      const AutoSizeText(
-                                        "Enter user names",
-                                        style: TextStyle(
-                                            color: AppColors.whiteColor,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      SizedBox(
-                                        height: 10.h,
-                                      ),
-                                      const Divider(
-                                        color: AppColors.greyColor,
-                                      ),
-                                      SizedBox(
-                                        height: 10.h,
-                                      ),
-                                      DisplayUsersList(
-                                          usersMap: userMap, value: value),
-                                      FadeIn(
-                                        delay: Duration(
-                                            milliseconds: 200 *
-                                                value.numberOfUsersEntered),
-                                        child: const Divider(
-                                          color: AppColors.whiteColor,
-                                        ),
-                                      ),
-                                      SaveUserNamesButton(
-                                          value: value,
-                                          formKey: formKey,
-                                          userMap: userMap),
-                                      const SizedBox(
-                                        height: 5,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              );
-                            }
+                            // if (value.usersNumberEntered) {
+                            //   return Padding(
+                            //     padding:
+                            //         const EdgeInsets.symmetric(vertical: 20),
+                            //     child: Form(
+                            //       key: formKey,
+                            //       child: Column(
+                            //         children: [
+                            //           const AutoSizeText(
+                            //             "Enter user names",
+                            //             style: TextStyle(
+                            //                 color: AppColors.whiteColor,
+                            //                 fontWeight: FontWeight.bold),
+                            //           ),
+                            //           SizedBox(
+                            //             height: 10.h,
+                            //           ),
+                            //           const Divider(
+                            //             color: AppColors.greyColor,
+                            //           ),
+                            //           SizedBox(
+                            //             height: 10.h,
+                            //           ),
+                            //           DisplayUsersList(
+                            //               usersMap: userMap, value: value),
+                            //           FadeIn(
+                            //             delay: Duration(
+                            //                 milliseconds: 200 *
+                            //                     value.numberOfUsersEntered),
+                            //             child: const Divider(
+                            //               color: AppColors.whiteColor,
+                            //             ),
+                            //           ),
+                            //           SaveUserNamesButton(
+                            //               value: value,
+                            //               formKey: formKey,
+                            //               userMap: userMap),
+                            //           const SizedBox(
+                            //             height: 5,
+                            //           )
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   );
+                            // }
                             return PeopleSelectionAnimation(
                                 animationController: _animationController);
                           },

@@ -6,19 +6,26 @@ import 'package:provider/provider.dart';
 
 class ArrangUserWithItemsScreen extends StatelessWidget {
   final int userLength;
-  const ArrangUserWithItemsScreen({super.key, required this.userLength});
-
+  ArrangUserWithItemsScreen({super.key, required this.userLength});
+  final PageController _pageController = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: AppColors.primaryColor,
-        body: Consumer<AppServices>(builder: (context, value, _) {
-          return PageView.builder(
-            itemCount: userLength,
-            itemBuilder: (context, index) {
-              return AssignItemsUser(index: index);
-            },
-          );
-        }));
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+          backgroundColor: AppColors.primaryColor,
+          body: Consumer<AppServices>(builder: (context, value, _) {
+            return PageView.builder(
+              controller: _pageController,
+              itemCount: userLength,
+              itemBuilder: (context, index) {
+                return AssignItemsUser(
+                  index: index,
+                  pageController: _pageController,
+                );
+              },
+            );
+          })),
+    );
   }
 }

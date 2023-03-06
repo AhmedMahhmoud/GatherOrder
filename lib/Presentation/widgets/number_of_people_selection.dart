@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ordering_system/Core/ColorManager/app_colors.dart';
 import 'package:ordering_system/Core/Shared/shared_methods.dart';
+import 'package:ordering_system/Presentation/assign_items_to_user/screens/arrang_user_with_items_screen.dart';
 import 'package:ordering_system/ViewModel/app_services.dart';
 import 'package:provider/provider.dart';
 
@@ -123,9 +124,17 @@ class _NumberOfPeopleSelectionState extends State<NumberOfPeopleSelection> {
                                 return;
                               } else {
                                 Provider.of<AppServices>(context, listen: false)
-                                  ..confirmUserNumberEntered()
-                                  ..setNumberOfUsersEntered(
-                                      int.parse(_numberOfPeople.text));
+                                    .setNumberOfUsersEntered(
+                                        int.parse(_numberOfPeople.text));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ArrangUserWithItemsScreen(
+                                              userLength: int.parse(
+                                                  _numberOfPeople.text
+                                                      .toString())),
+                                    ));
                               }
                             },
                             child: FadeIn(
