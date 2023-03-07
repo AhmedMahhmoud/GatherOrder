@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ordering_system/Core/ColorManager/app_colors.dart';
 
 class CustomDropDown extends StatefulWidget {
   final List<DropdownMenuItem> dropDownMenuItems;
@@ -38,6 +39,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
       height: widget.height ?? 30.h,
       child: DropdownButtonHideUnderline(
         child: DropdownButtonFormField2(
+            style: const TextStyle(color: AppColors.blackColor),
             validator: widget.validatorFun,
             alignment: Alignment.topLeft,
             decoration: InputDecoration(

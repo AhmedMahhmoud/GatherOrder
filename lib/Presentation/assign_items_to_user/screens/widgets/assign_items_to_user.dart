@@ -8,12 +8,19 @@ import 'package:ordering_system/ViewModel/app_services.dart';
 import 'package:ordering_system/ViewModel/items/iterms_services.dart';
 import 'package:provider/provider.dart';
 
-class AssignItemsUser extends StatelessWidget {
+class AssignItemsUser extends StatefulWidget {
   final int index;
   final PageController pageController;
-  AssignItemsUser(
+  const AssignItemsUser(
       {super.key, required this.index, required this.pageController});
+
+  @override
+  State<AssignItemsUser> createState() => _AssignItemsUserState();
+}
+
+class _AssignItemsUserState extends State<AssignItemsUser> {
   final TextEditingController _quanitityController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final items = Provider.of<ItemServices>(context, listen: false).items;
@@ -41,7 +48,7 @@ class AssignItemsUser extends StatelessWidget {
                     height: 3,
                   ),
                   AutoSizeText(
-                    "User ${index + 1} ",
+                    "User ${widget.index + 1} ",
                     style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: AppColors.whiteColor),
@@ -145,14 +152,14 @@ class AssignItemsUser extends StatelessWidget {
                                   color: AppColors.blackColor),
                             ),
                             SizedBox(
-                              width: 50.w,
+                              width: 60.w,
                               height: 50.h,
                               child: Center(
                                 child: TextFormField(
                                   keyboardType: TextInputType.number,
                                   controller: _quanitityController,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.black),
+                                  style: const TextStyle(color: Colors.black),
                                   enabled: true,
                                   onChanged: (value) {},
                                   cursorColor: AppColors.whiteColor,
@@ -194,13 +201,13 @@ class AssignItemsUser extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15)),
               onPressed: () {
-                pageController.animateToPage(index + 1,
+                widget.pageController.animateToPage(widget.index + 1,
                     duration: const Duration(milliseconds: 200),
                     curve: Curves.linear);
               },
               child: Center(
                 child: Text(
-                  index ==
+                  widget.index ==
                           Provider.of<AppServices>(context, listen: false)
                                   .numberOfUsersEntered -
                               1
