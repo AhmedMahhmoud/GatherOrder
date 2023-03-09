@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ordering_system/Core/ColorManager/app_colors.dart';
 import 'package:ordering_system/Presentation/assign_items_to_user/screens/widgets/assign_items_to_user.dart';
 import 'package:ordering_system/ViewModel/app_services.dart';
+import 'package:ordering_system/ViewModel/users_services.dart';
 import 'package:provider/provider.dart';
 
 class ArrangUserWithItemsScreen extends StatelessWidget {
@@ -10,6 +11,8 @@ class ArrangUserWithItemsScreen extends StatelessWidget {
   final PageController _pageController = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
+    final users = Provider.of<UsersServices>(context, listen: false).users;
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -20,6 +23,7 @@ class ArrangUserWithItemsScreen extends StatelessWidget {
               itemCount: userLength,
               itemBuilder: (context, index) {
                 return AssignItemsUser(
+                  order: users[index].order,
                   index: index,
                   pageController: _pageController,
                 );

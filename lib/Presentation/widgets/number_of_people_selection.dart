@@ -6,6 +6,7 @@ import 'package:ordering_system/Core/ColorManager/app_colors.dart';
 import 'package:ordering_system/Core/Shared/shared_methods.dart';
 import 'package:ordering_system/Presentation/assign_items_to_user/screens/arrang_user_with_items_screen.dart';
 import 'package:ordering_system/ViewModel/app_services.dart';
+import 'package:ordering_system/ViewModel/users_services.dart';
 import 'package:provider/provider.dart';
 
 class NumberOfPeopleSelection extends StatefulWidget {
@@ -125,6 +126,10 @@ class _NumberOfPeopleSelectionState extends State<NumberOfPeopleSelection> {
                               } else {
                                 Provider.of<AppServices>(context, listen: false)
                                     .setNumberOfUsersEntered(
+                                        int.parse(_numberOfPeople.text));
+                                Provider.of<UsersServices>(context,
+                                        listen: false)
+                                    .createListOfUsers(
                                         int.parse(_numberOfPeople.text));
                                 Navigator.push(
                                     context,

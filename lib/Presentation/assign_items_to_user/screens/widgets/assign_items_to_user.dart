@@ -4,15 +4,23 @@ import 'package:ordering_system/Core/ColorManager/app_colors.dart';
 import 'package:ordering_system/Core/Shared/custom_dropdown.dart';
 import 'package:ordering_system/Core/Shared/custom_text_field.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ordering_system/Model/items.dart';
+import 'package:ordering_system/Model/order.dart';
+import 'package:ordering_system/Presentation/assign_items_to_user/screens/widgets/item_card.dart';
 import 'package:ordering_system/ViewModel/app_services.dart';
 import 'package:ordering_system/ViewModel/items/iterms_services.dart';
+import 'package:ordering_system/ViewModel/users_services.dart';
 import 'package:provider/provider.dart';
 
 class AssignItemsUser extends StatefulWidget {
   final int index;
+  final Order order;
   final PageController pageController;
   const AssignItemsUser(
-      {super.key, required this.index, required this.pageController});
+      {super.key,
+      required this.index,
+      required this.order,
+      required this.pageController});
 
   @override
   State<AssignItemsUser> createState() => _AssignItemsUserState();
@@ -20,10 +28,12 @@ class AssignItemsUser extends StatefulWidget {
 
 class _AssignItemsUserState extends State<AssignItemsUser> {
   final TextEditingController _quanitityController = TextEditingController();
-
+  int lengthOfitem = 1;
   @override
   Widget build(BuildContext context) {
     final items = Provider.of<ItemServices>(context, listen: false).items;
+    final usersProvider = Provider.of<UsersServices>(context, listen: true);
+
     String selectedItem = items.first.itemName;
     return ListView(
       shrinkWrap: true,
@@ -162,6 +172,14 @@ class _AssignItemsUserState extends State<AssignItemsUser> {
                                   style: const TextStyle(color: Colors.black),
                                   enabled: true,
                                   onChanged: (value) {},
+                                  onFieldSubmitted: (value) {
+                                    usersProvider.addUsers(
+                                        Items(
+                                            itemName: selectedItem,
+                                            itemPrice: 10.00,
+                                            itemQuantity: 2),
+                                        widget.index);
+                                  },
                                   cursorColor: AppColors.whiteColor,
                                   decoration: InputDecoration(
                                     contentPadding: EdgeInsets.symmetric(
@@ -185,7 +203,32 @@ class _AssignItemsUserState extends State<AssignItemsUser> {
                       ],
                     ),
                   ),
-                )
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                if (widget.order.items != null &&
+                    widget.order.items!.isNotEmpty)
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount:
+                        usersProvider.users[widget.index].order.items!.length,
+                    itemBuilder: (context, index) {
+                      return ItemCard(items: widget.order.items![index]);
+                    },
+                  ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                // GestureDetector(
+                //   onTap: () => setState(() {
+                //     lengthOfitem++;
+                //   }),
+                //   child: Container(
+                //       decoration: BoxDecoration(
+                //           border: Border.all(color: Colors.white)),
+                //       child: Icon(Icons.add, color: Colors.white)),
+                // ),
               ],
             ),
           ),
