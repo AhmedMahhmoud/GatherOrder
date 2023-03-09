@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:ordering_system/Core/ColorManager/app_colors.dart';
@@ -27,14 +29,22 @@ class AssignItemsUser extends StatefulWidget {
 }
 
 class _AssignItemsUserState extends State<AssignItemsUser> {
+  List<Items> items = [];
+  String selectedItem = "";
+
+  @override
+  void didChangeDependencies() {
+    items = Provider.of<ItemServices>(context, listen: false).items;
+    selectedItem = items.first.itemName;
+    super.didChangeDependencies();
+  }
+
   final TextEditingController _quanitityController = TextEditingController();
   int lengthOfitem = 1;
   @override
   Widget build(BuildContext context) {
-    final items = Provider.of<ItemServices>(context, listen: false).items;
     final usersProvider = Provider.of<UsersServices>(context, listen: true);
 
-    String selectedItem = items.first.itemName;
     return ListView(
       shrinkWrap: true,
       children: [
@@ -146,7 +156,9 @@ class _AssignItemsUserState extends State<AssignItemsUser> {
                                     .toList(),
                                 hint: "Item",
                                 callBackFun: (v) {
-                                  selectedItem = v;
+                                  setState(() {
+                                    selectedItem = v;
+                                  });
                                 },
                                 dropDownValue: selectedItem),
                           ],
@@ -173,17 +185,17 @@ class _AssignItemsUserState extends State<AssignItemsUser> {
                                   enabled: true,
                                   onChanged: (value) {},
                                   onFieldSubmitted: (value) {
-                                    usersProvider.addUsers(
-                                        Items(
-                                            itemName: selectedItem,
-                                            itemPrice: items
-                                                    .firstWhere((element) =>
-                                                        element.itemName ==
-                                                        selectedItem)
-                                                    .itemPrice *
-                                                double.parse(value),
-                                            itemQuantity: int.parse(value)),
-                                        widget.index);
+                                    var item = Items(
+                                        itemName: selectedItem,
+                                        itemPrice: items
+                                                .firstWhere((element) =>
+                                                    element.itemName ==
+                                                    selectedItem)
+                                                .itemPrice *
+                                            double.parse(value),
+                                        itemQuantity: int.parse(value));
+                                    inspect(item);
+                                    usersProvider.addUsers(item, widget.index);
                                   },
                                   cursorColor: AppColors.whiteColor,
                                   decoration: InputDecoration(

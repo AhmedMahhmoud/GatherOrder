@@ -10,40 +10,37 @@ class ItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 8.w),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: 70.w,
-            child: Text(
-              items.itemName,
-              textAlign: TextAlign.center,
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-          ),
-          SizedBox(
-            width: 20.w,
-            child: Center(
+      child: DefaultTextStyle(
+        style:
+            const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 70.w,
               child: Text(
-                items.itemQuantity.toString(),
+                items.itemName,
                 textAlign: TextAlign.center,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
             ),
-          ),
-          SizedBox(
-            width: 30.w,
-            child: Text(
-              items.itemPrice.toString(),
-              textAlign: TextAlign.center,
-              style:
-                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            SizedBox(
+              width: 20.w,
+              child: Center(
+                child: Text(
+                  items.itemQuantity.toString(),
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
-          ),
-        ],
+            SizedBox(
+              child: Text(
+                items.itemPrice.toString(),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
