@@ -9,21 +9,39 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 12.w),
+      padding: EdgeInsets.symmetric(horizontal: 8.w),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            items.itemName,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          SizedBox(
+            width: 70.w,
+            child: Text(
+              items.itemName,
+              textAlign: TextAlign.center,
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
           ),
-          Text(
-            items.itemQuantity.toString(),
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          SizedBox(
+            width: 20.w,
+            child: Center(
+              child: Text(
+                items.itemQuantity.toString(),
+                textAlign: TextAlign.center,
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
-          Text(
-            items.itemPrice.toString(),
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          SizedBox(
+            width: 30.w,
+            child: Text(
+              items.itemPrice.toString(),
+              textAlign: TextAlign.center,
+              style:
+                  TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),

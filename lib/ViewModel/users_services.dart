@@ -16,6 +16,8 @@ class UsersServices extends ChangeNotifier {
 
   addUsers(Items item, int index) {
     users[index].order.items!.add(item);
+    users[index].order.totalAmount =
+        users[index].order.totalAmount! + item.itemPrice;
     notifyListeners();
   }
 }

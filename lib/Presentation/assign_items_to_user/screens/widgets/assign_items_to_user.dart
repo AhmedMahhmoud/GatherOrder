@@ -176,8 +176,13 @@ class _AssignItemsUserState extends State<AssignItemsUser> {
                                     usersProvider.addUsers(
                                         Items(
                                             itemName: selectedItem,
-                                            itemPrice: 10.00,
-                                            itemQuantity: 2),
+                                            itemPrice: items
+                                                    .firstWhere((element) =>
+                                                        element.itemName ==
+                                                        selectedItem)
+                                                    .itemPrice *
+                                                double.parse(value),
+                                            itemQuantity: int.parse(value)),
                                         widget.index);
                                   },
                                   cursorColor: AppColors.whiteColor,
@@ -229,6 +234,33 @@ class _AssignItemsUserState extends State<AssignItemsUser> {
                 //           border: Border.all(color: Colors.white)),
                 //       child: Icon(Icons.add, color: Colors.white)),
                 // ),
+                Spacer(),
+                Divider(
+                  color: AppColors.greyColor,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Total  Payout  : ',
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          usersProvider.users[widget.index].order.totalAmount
+                              .toString(),
+                          style: const TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                  ),
+                )
               ],
             ),
           ),
@@ -262,7 +294,7 @@ class _AssignItemsUserState extends State<AssignItemsUser> {
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }
